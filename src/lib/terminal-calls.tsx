@@ -26,6 +26,10 @@ const terminalCalls = {
   initChecks,
   getNet,
   getToken,
+  getStatus,
+  getProposals,
+  getVotes,
+  getFrozen,
 }
 
 export default terminalCalls;
@@ -106,33 +110,78 @@ const commandCall = (type: string) => {
     const result = execSync(`${type}`);
     return {
       error: false,
-      msg: removeLineBreaks(result.toString())
+      msg: result.toString()
     }
   } catch (err: any) {
     return {
       error: true,
-      msg: removeLineBreaks(err?.message.toString())
+      msg: err?.message.toString()
     }
   }
 }
 
 async function getNet() {
   const serverCall = server$(async  () => {
-    return commandCall(`cat $${DATA}/algod.net`)
+    const resp = commandCall(`cat $${DATA}/algod.net`)
+    resp.msg = removeLineBreaks(resp.msg);
+    return resp;
   })
   return await serverCall();
 }
 
 async function getToken() {
   const serverCall = server$(async  () => {
-    return commandCall(`cat $${DATA}/algod.token`);
+    const resp = commandCall(`cat $${DATA}/algod.net`)
+    resp.msg = removeLineBreaks(resp.msg);
+    return resp;
   })
   return await serverCall();
 }
 
 async function getStatus() {
   const serverCall = server$(async  () => {
-    return commandCall(`$${NODE}/goal node status -d ${DATA}`);
+    const resp = commandCall(`$${NODE}/goal node status -d $${DATA}`);
+    
+    // convert the status msg into an OBJ
+    const obj: { [key: string]: string } = {};
+    resp.msg = resp.msg.split(/\r\n|\r|\n/);
+    
+    // remove an extra line break if it exists
+    if (resp.msg[resp.msg.length - 1] === '') resp.msg.pop();
+    resp.msg.forEach((m: string) => {
+      const line = m.split(': ');
+      obj[line[0]] = line[1];
+    });
+    resp.msg = obj;
+    return resp;
   })
+  return await serverCall();
+}
+
+
+async function getProposals() {
+  const serverCall = server$(async  () => {
+    const resp = commandCall(`echo $(grep -c 'ProposalBroadcast' $${DATA}/node.log)`);
+    resp.msg = removeLineBreaks(resp.msg);
+    return resp
+  });
+  return await serverCall();
+}
+
+async function getVotes() {
+  const serverCall = server$(async  () => {
+    const resp = commandCall(`echo $(grep -c 'VoteBroadcast' $${DATA}/node.log)`);
+    resp.msg = removeLineBreaks(resp.msg);
+    return resp
+  });
+  return await serverCall();
+}
+
+async function getFrozen() {
+  const serverCall = server$(async  () => {
+    const resp = commandCall(`echo $(grep -c 'froze' $${DATA}/node.log)`);
+    resp.msg = removeLineBreaks(resp.msg);
+    return resp
+  });
   return await serverCall();
 }

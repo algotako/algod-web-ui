@@ -15,8 +15,8 @@ export default function Checks() {
         // Something went wrong
       } else {
         store.setState('isInitialized', true);
-        store.setState('url', `http://${net}`);
-        store.setState('token', token);
+        store.setState('url', `http://${net.msg}`);
+        store.setState('token', token.msg);
       }
     } else {
       // Not all checks passed let the user know
