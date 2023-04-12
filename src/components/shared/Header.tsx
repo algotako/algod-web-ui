@@ -19,7 +19,7 @@ function Separator() {
 
 const Header = () => {
   return (
-    <div class='bg-white dark:bg-gray-800 text-black dark:text-gray-200 h-16 px-4 flex justify-between items-center border-b border-gray-200'>
+    <div class='bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 h-16 px-4 flex justify-between items-center border-b border-gray-200'>
       <div>
         <span class='cursor-pointer'>
           <FontAwesomeIcon icon='fa-solid fa-bars' />
@@ -44,7 +44,7 @@ const Header = () => {
           {({ isOpen }) => (
             <>
               <PopoverButton
-                class={`${isOpen() && 'bg-gray-100 dark:bg-gray-900'} p-1.5 rounded-sm inline-flex items-center hover:text-opacity-100 focus:outline-none active:bg-gray-100 dark:active:bg-gray-900`}
+                class={`${isOpen() && 'bg-gray-300 dark:bg-gray-900'} p-1.5 rounded-sm inline-flex items-center hover:text-opacity-100 focus:outline-none active:bg-gray-100 dark:active:bg-gray-900`}
               >
                 <div>
                   <FontAwesomeIcon icon='fa-solid fa-bell' />
@@ -61,7 +61,7 @@ const Header = () => {
               >
                 <PopoverPanel class="bg-white dark:bg-gray-600 text-black dark:text-white absolute right-0 z-10 mt-2.5 w-80">
                   <div class='bg-white dark:bg-gray-700 rounded-sm shadow-md ring-1 ring-black ring-opacity-5 px-2 py-2.5'>
-                    <strong class='text-gray-200 font-medium'>Notifications</strong>
+                    <strong class='text-gray-600 font-medium'>Notifications</strong>
                     <div class='mt-2 py-1 text-sm'>
                       This is a message.
                     </div>
@@ -74,7 +74,8 @@ const Header = () => {
         <Popover defaultOpen={false} class="relative">
           {({ isOpen }) => (
             <>
-              <PopoverButton class={`${isOpen() && 'bg-gray-100 dark:bg-gray-900'} flex items-center`}>
+              <PopoverButton 
+                class={`${isOpen() && 'bg-gray-300 dark:bg-gray-900'} p-1 rounded-sm inline-flex items-center hover:text-opacity-100 focus:outline-none active:bg-gray-100 dark:active:bg-gray-900`}>
                 <FontAwesomeIcon icon='fa-solid fa-user' />
               </PopoverButton>
               <Transition

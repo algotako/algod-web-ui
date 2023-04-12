@@ -8,10 +8,13 @@ import {
   Html,
   Meta,
   Routes,
+  Route,
   Scripts,
   Title,
 } from "solid-start";
 import "./root.css";
+import Home from './routes/index';
+import { GlobalContextProvider } from './context/store';
 
 export default function Root() {
   return (
@@ -21,12 +24,15 @@ export default function Root() {
         <Meta charset="utf-8" />
         <Meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
-      <Body class='light'>
+      <Body class='dark'>
         <Suspense>
           <ErrorBoundary>
-            <Routes>
-              <FileRoutes />
-            </Routes>
+            <GlobalContextProvider>
+              <Routes>
+                <Route path="/" element={<Home />}>
+                </Route>
+              </Routes>
+            </GlobalContextProvider>
           </ErrorBoundary>
         </Suspense>
         <Scripts />

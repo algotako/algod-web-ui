@@ -33,7 +33,7 @@ const Sidebar = () => {
       <A 
         onClick={(e) => highLight(e, location.pathname)} 
         href={item.path} 
-        id={item.path} 
+        id={item.path}
         class={linkClasses}>
           <span class='w-[1.2rem]'>
             {item.icon}
@@ -44,7 +44,7 @@ const Sidebar = () => {
   }
 
   return (
-    <div class='flex flex-col bg-neutral-300 dark:bg-gray-700 p-3 w-60 text-neurtral-400 dark:text-neutral-300'>
+    <div class='flex flex-col bg-gray-300 dark:bg-gray-700 text-gray-700 dark:text-gray-200  p-3 w-60'>
       <div class='flex items-center gap-2 px-1 py-3 text-gray-600 dark:text-white'>
         <FontAwesomeIcon icon="fa-solid fa-hard-drive" />
         <span class='text-neutral-600 dark:text-white text-lg'>Algod Web UI</span>
