@@ -1,5 +1,5 @@
 import server$ from 'solid-start/server';
-import { execSync } from 'child_process';
+import { execSync, exec } from 'child_process';
 
 const NODE = 'ALGORAND_NODE';
 const DATA = 'ALGORAND_DATA';

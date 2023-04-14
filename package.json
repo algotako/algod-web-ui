@@ -21,6 +21,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.4.0",
     "@solidjs/meta": "^0.28.2",
     "@solidjs/router": "^0.8.2",
+    "solid-apexcharts": "^0.2.4",
     "solid-fontawesome": "^0.1.0",
     "solid-headless": "^0.13.1",
     "solid-js": "^1.7.2",

@@ -44,19 +44,19 @@ const Sidebar = () => {
   }
 
   return (
-    <div class='flex flex-col bg-gray-300 dark:bg-gray-700 text-gray-700 dark:text-gray-200  p-3 w-60'>
+    <div class='flex flex-col bg-gray-300 dark:bg-gray-800 text-gray-700 dark:text-gray-200  p-3 w-60 border-r border-gray-200 dark:border-gray-700 '>
       <div class='flex items-center gap-2 px-1 py-3 text-gray-600 dark:text-white'>
         <FontAwesomeIcon icon="fa-solid fa-hard-drive" />
         <span class='text-neutral-600 dark:text-white text-lg'>Algod Web UI</span>
       </div>
-      <div class='flex-1 py-8 flex flex-col gap-0.5'>
+      <div class='flex-1 py-8 flex flex-col gap-1'>
         <For each={DASHBOARD_SIDEBAR_LINKS}>
           {(item) =>
             <SidebarLink item={item} />
           }
         </For>
       </div>
-      <div class='flex flex-col gap-0.5 pt-2 border-t border-neutral-700'>
+      <div class='flex flex-col gap-0.5 pt-2 border-t border-gray-700'>
         <For each={DASHBOARD_SIDEBAR_BOTTOM_LINKS} fallback={<div>Loading...</div>}>
           {(item) =>
             <SidebarLink item={item} />
