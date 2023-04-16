@@ -83,23 +83,22 @@ const radialTemplate = {
 };
 
 const barTemplate = {
-  options: {
-    list: [
-      {
-        name: 'Votes',
-        data: [3, 2, 6, 5, 10, 7],
-      },
-    ]
-  },
   chart: {
-    id: '',
     background: 'transparent',
     toolbar: {
       show: false
     }
   },
+  dataLabels: {
+    enabled: false
+  },
   xaxis: {
     categories: [],
+  },
+  yaxis: {
+    title: {
+      text: 'Num Votes'
+    }
   },
   theme: {
     mode: 'dark', 
@@ -107,32 +106,28 @@ const barTemplate = {
   },
   fill: {
     colors: undefined,
-    opacity: 0.9,
+    opacity: 0.85,
     type: 'solid',
     gradient: {
         shade: 'dark',
         type: "horizontal",
         shadeIntensity: 0.5,
         gradientToColors: undefined,
-        inverseColors: true,
+        inverseColors: false,
         opacityFrom: 1,
         opacityTo: 1,
         stops: [0, 50, 100],
         colorStops: []
     },
-    image: {
-        src: [],
-        width: undefined,
-        height: undefined
-    },
     pattern: {
-        style: 'verticalLines',
-        width: 6,
-        height: 6,
-        strokeWidth: 2,
+      style: 'verticalLines',
+      width: 6,
+      height: 6,
+      strokeWidth: 2,
     },
   }
 }
+
 
 // Takes in options to determine how the radial bar looks
 const radialBarBuilder = (options: any) => {
@@ -146,14 +141,14 @@ const radialBarBuilder = (options: any) => {
 // Takes in options to determine how the radial bar looks
 const barBuilder = (options: any) => {
   const template = JSON.parse(JSON.stringify(barTemplate));
-  template.series = [Number(options.series)];
-  template.options.plotOptions.radialBar.track.background = options.trackBackground;
+  template.xaxis.categories = options.timeStamps;
   //template.options.fill.gradient.gradientToColor = options.fillGradientColor;
   return template;
 }
 
 const barTypes = {
   radialBarBuilder,
+  barBuilder
 };
 
 export default barTypes;

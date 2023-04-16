@@ -233,19 +233,22 @@ const generateDates = (date: Date) => {
   }
   return timeStamps;
 }
+
 // Will get and return an array of votes for the last 6 hours
 async function getHourlyVotes() {
   const serverCall = server$(async () => {
-    const voteDate = {
+    const voteTime = {
       timeStamps: generateDates(new Date()).reverse(),
       votes: new Array()
     }
-    voteDate.timeStamps.forEach((timeStamp) => {
+    voteTime.timeStamps.forEach((timeStamp, i) => {
       const resp = commandCall(`echo $(grep -cE 'VoteBroadcast.*${timeStamp}' $ALGORAND_DATA/node.log)`);
       const votes = Number(removeLineBreaks(resp.msg));
-      voteDate.votes.push(votes);
+      voteTime.votes.push(votes);
+      // Adjust dates to show time in HH:MM format
+      voteTime.timeStamps[i] = `${timeStamp.slice(-2).replace('T', '0')}:00`;
     });
-    return voteDate;
+    return voteTime;
   });
   return await serverCall();
 }

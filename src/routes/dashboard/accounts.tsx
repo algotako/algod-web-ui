@@ -1,6 +1,6 @@
 import { A } from "solid-start";
 
-export default function Account() {
+export default function Accounts() {
   return (
     <>
       Account

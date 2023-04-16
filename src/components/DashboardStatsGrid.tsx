@@ -7,10 +7,10 @@ import terminalCalls from '../lib/terminal-calls';
 const DashboardStatsGrid = () => {
   const store: any = useGlobalContext();
   const [state, setState] = createStore({
-    lastRound: '',
-    proposals: '',
-    votes: '',
-    frozen: '',
+    lastRound: '-',
+    proposals: '-',
+    votes: '-',
+    frozen: '-',
   });
 
   onMount(async () => {
@@ -38,7 +38,7 @@ const DashboardStatsGrid = () => {
   return (
     <div class='flex gap-4 text-gray-800 dark:text-gray-200 w-full'>
       <BoxWrapper>
-        <div class='rounded-full h-10 w-10 flex items-center justify-center bg-purple-600'>
+        <div class='rounded-full h-10 w-10 flex items-center justify-center bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-indigo-300 to-purple-400'>
           <span class='relative top-0.5 text-lg text-gray-100'>
             <FontAwesomeIcon icon='fa-solid fa-timeline'/>
           </span>
@@ -55,7 +55,7 @@ const DashboardStatsGrid = () => {
         </div>
       </BoxWrapper>
       <BoxWrapper>
-        <div class='rounded-full h-10 w-10 flex items-center justify-center bg-green-600'>
+        <div class='rounded-full h-10 w-10 flex items-center justify-center bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-green-500 to-green-700'>
           <span class='relative top-0.5 text-lg text-gray-100'>
             <FontAwesomeIcon icon='fa-solid fa-diagram-project'/>
           </span>
@@ -70,7 +70,7 @@ const DashboardStatsGrid = () => {
         </div>
       </BoxWrapper>
       <BoxWrapper>
-        <div class='rounded-full h-10 w-10 flex items-center justify-center bg-orange-600'>
+        <div class='rounded-full h-10 w-10 flex items-center justify-center bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-yellow-600 to-red-600'>
           <span class='relative text-lg text-gray-100'>
             <FontAwesomeIcon icon='fa-solid fa-check-to-slot'/>
           </span>
@@ -85,8 +85,8 @@ const DashboardStatsGrid = () => {
         </div>
       </BoxWrapper>
       <BoxWrapper>
-        <div class='rounded-full h-10 w-10 flex items-center justify-center bg-sky-500'>
-          <span class='relative text-lg text-gray-200'>
+        <div class='rounded-full h-10 w-10 flex items-center justify-center bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-sky-400 to-sky-200'>
+          <span class='relative text-lg text-gray-100'>
             <FontAwesomeIcon icon='fa-solid fa-snowflake'/>
           </span>
         </div>

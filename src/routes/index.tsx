@@ -1,5 +1,5 @@
 import { Routes, Route } from "solid-start";
-import { Show, Switch, Match, lazy } from 'solid-js';
+import { Switch, Match, lazy } from 'solid-js';
 import { useGlobalContext } from '../context/store';
 
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -7,15 +7,13 @@ import { fas } from '@fortawesome/free-solid-svg-icons'
 import { far } from '@fortawesome/free-regular-svg-icons'
 import { faTwitter, faDashcube } from '@fortawesome/free-brands-svg-icons';
 
-//import Checks from '~/components/Checks';
-//import Layout from "~/components/shared/Layout";
 const Checks = lazy(() => import('~/components/Checks'));
 const Layout = lazy(() => import('~/components/shared/Layout'));
 const Dashboard = lazy(() => import('./dashboard/index'));
+const Accounts = lazy(() => import('./accounts'));
 
 // Add fontawesome to library
 library.add(fas, far, faTwitter, faDashcube);
-
 
 export default function Home() {
   const store: any = useGlobalContext();
@@ -29,6 +27,7 @@ export default function Home() {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route path="/" element={<Dashboard />} />
+            <Route path="/accounts" element={<Accounts />} />
           </Route>
         </Routes>
       </Match>

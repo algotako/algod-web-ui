@@ -20,13 +20,7 @@ function Separator() {
 const Header = () => {
   return (
     <div class='bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 h-16 px-4 flex justify-between items-center border-b border-gray-200 dark:border-gray-700'>
-      <div>
-        <span class='cursor-pointer'>
-          <FontAwesomeIcon icon='fa-solid fa-bars' />
-        </span>
-      </div>
-      
-      <div class='relative'>
+       <div class='relative'>
         <span class='text-gray-300 absolute top-1/2 -translate-y-1/2 left-3'>
           <FontAwesomeIcon icon='fa-solid fa-magnifying-glass' />
         </span>

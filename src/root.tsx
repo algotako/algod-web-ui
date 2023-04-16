@@ -12,9 +12,11 @@ import {
   Scripts,
   Title,
 } from "solid-start";
+import { lazy } from 'solid-js';
 import "./root.css";
-import Home from './routes/index';
 import { GlobalContextProvider } from './context/store';
+
+const Home = lazy(() => import('./routes/index'));
 
 export default function Root() {
   return (
@@ -28,10 +30,7 @@ export default function Root() {
         <Suspense>
           <ErrorBoundary>
             <GlobalContextProvider>
-              <Routes>
-                <Route path="/" element={<Home />}>
-                </Route>
-              </Routes>
+              <Home />
             </GlobalContextProvider>
           </ErrorBoundary>
         </Suspense>
