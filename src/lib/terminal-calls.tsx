@@ -22,18 +22,6 @@ type Checks = {
   error: Array<Error>;
 }
 
-const terminalCalls = {
-  initChecks,
-  getNet,
-  getToken,
-  getStatus,
-  getProposals,
-  getVotes,
-  getFrozen,
-}
-
-export default terminalCalls;
-
 // Remove all line breaks from terminal calls
 const removeLineBreaks = (str: string) => {
   return str.replace(/(\r\n|\n|\r)/gm, "");
@@ -158,7 +146,6 @@ async function getStatus() {
   return await serverCall();
 }
 
-
 async function getProposals() {
   const serverCall = server$(async  () => {
     const resp = commandCall(`echo $(grep -c 'ProposalBroadcast' $${DATA}/node.log)`);
@@ -185,3 +172,95 @@ async function getFrozen() {
   });
   return await serverCall();
 }
+
+// async calls
+// const asyncCall = async (type: string) => {
+//   const resp = exec(`${type}`, (err: any, stdout: any, sterr: any) => {
+//     debugger;
+//     if (err) {
+//       return {
+//         error: true,
+//         msg: 'Something went wrong',
+//       }
+//     }
+//     return {
+//       error: false,
+//       msg: stdout.toString()
+//     }
+//   });
+//   debugger;
+// };
+
+async function getMemUsed() {
+  const serverCall = server$(async  () => {
+    const usedMem = commandCall(`echo $(($(free | grep Mem: | awk '{print $2}') - $(free | grep Mem: | awk '{print $7}')))`);
+    const totalMem = commandCall(`echo $(free | grep Mem: | awk '{print $2}')`);
+    if (usedMem.error || totalMem.error) {
+      // There were some errors
+    } else {
+      const percentage = (Number(removeLineBreaks(usedMem.msg)) * 100) / Number(removeLineBreaks(totalMem.msg));
+      return percentage.toFixed(1);
+    }
+  });
+  return await serverCall();
+}
+
+async function getDiskUsed() {
+  const serverCall = server$(async  () => {
+    const diskUsed = commandCall(`df -T | awk '{if($7 == "/") print $6}' | sed 's/%//g'`);
+    if (diskUsed.error) {
+      // There were some errors
+    } else {
+      return removeLineBreaks(diskUsed.msg);
+    }
+  });
+  return await serverCall();
+}
+
+// Special function used to generate a time stamp to query the logs
+const generateDates = (date: Date) => {
+  const timeStamps = [];
+  const month = `${date.getMonth() + 1 < 10 ? '0' : ''}${date.getMonth() + 1}`;
+  for (let i = 0; i < 6; i++) {
+    let hourOffset = date.getHours() - i;
+    let dateOffset = date.getDate();
+    // If we need to check times before midnight we need to adjust the date
+    if (hourOffset < 0) {
+      hourOffset = 24 + hourOffset;
+      dateOffset -= 1;
+    }
+    timeStamps.push(`${date.getFullYear()}-${month}-${dateOffset}T${hourOffset}`);
+  }
+  return timeStamps;
+}
+// Will get and return an array of votes for the last 6 hours
+async function getHourlyVotes() {
+  const serverCall = server$(async () => {
+    const voteDate = {
+      timeStamps: generateDates(new Date()).reverse(),
+      votes: new Array()
+    }
+    voteDate.timeStamps.forEach((timeStamp) => {
+      const resp = commandCall(`echo $(grep -cE 'VoteBroadcast.*${timeStamp}' $ALGORAND_DATA/node.log)`);
+      const votes = Number(removeLineBreaks(resp.msg));
+      voteDate.votes.push(votes);
+    });
+    return voteDate;
+  });
+  return await serverCall();
+}
+
+const terminalCalls = {
+  initChecks,
+  getNet,
+  getToken,
+  getStatus,
+  getProposals,
+  getVotes,
+  getFrozen,
+  getMemUsed,
+  getDiskUsed,
+  getHourlyVotes
+}
+
+export default terminalCalls;

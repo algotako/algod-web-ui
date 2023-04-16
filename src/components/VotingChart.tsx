@@ -1,8 +1,13 @@
-import { createSignal, createEffect } from "solid-js";
+import { createSignal, createEffect, onMount } from "solid-js";
 import { createStore } from 'solid-js/store'
 import { SolidApexCharts } from 'solid-apexcharts';
+import terminalCalls from "~/lib/terminal-calls";
 
 const VotingChart = () => {
+
+  onMount(() => {
+    const votes = terminalCalls.getHourlyVotes();
+  })
   
   const [options] = createStore({
     chart: {
@@ -57,12 +62,12 @@ const VotingChart = () => {
   });
 
   return (
-    <div class='bg-white dark:bg-gray-800 h-[22rem] p-4 rounded-sm flex flex-col flex-1 border border-gray-200 dark:border-gray-700 '> 
+    <div class='bg-white dark:bg-gray-800 h-[20rem] p-4 rounded-sm flex flex-col flex-1 border border-gray-200 dark:border-gray-700 '> 
         <strong class='text-gray-400 font-medium'>
           Votes
         </strong>
         <div class='w-full mt-3 flex-1 text-xs'>
-          <SolidApexCharts width="100%" height="300" type="bar" options={options} series={series.list} />
+          <SolidApexCharts width="100%" height="260" type="bar" options={options} series={series.list} />
         </div>
     </div>
   )
