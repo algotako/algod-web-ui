@@ -35,7 +35,7 @@ const VotingChart = () => {
   });
 
   return (
-    <div class='bg-white dark:bg-gray-800 h-[20rem] p-4 rounded-sm flex flex-col flex-1 border border-gray-200 dark:border-gray-700 '> 
+    <div class='bg-white dark:bg-gray-800 w-full h-[20rem] p-4 rounded-sm flex flex-1 border border-gray-200 dark:border-gray-700 '> 
       <Show when={!isLoading()} fallback={<div class='m-auto'><Spinner /></div>}>
         <strong class='text-gray-400 font-medium'>
           Votes

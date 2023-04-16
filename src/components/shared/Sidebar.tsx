@@ -8,6 +8,7 @@ const activeLinkBg= 'bg-neutral-500';
 const activeLinkText = 'text-white';
 
 const Sidebar = () => {
+  const [open, setOpen] = createSignal(true);
   const [currentPath, setCurrentPath] = createSignal(useLocation().pathname);
   const location = useLocation();
 
@@ -44,9 +45,9 @@ const Sidebar = () => {
   }
 
   return (
-    <div class='flex flex-col bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200  p-3 w-60 border-r border-gray-200 dark:border-gray-700 '>
-      <div class='flex items-center gap-2 px-1 py-3 text-gray-600 dark:text-white'>
-        <span class='cursor-pointer mr-5'>
+    <aside class={`${open() ? 'w-60' : 'w-20'} duration-300 flex flex-col bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 p-3 border-r border-gray-200 dark:border-gray-700`}>
+      <div class='flex items-center gap-5 px-3 py-3 text-gray-600 dark:text-white'>
+        <span class='cursor-pointer' onClick={() => setOpen(!open())}>
           <FontAwesomeIcon icon='fa-solid fa-bars' />
         </span>
         <span class='justify-center text-neutral-600 dark:text-white text-lg'>Algod Web UI</span>
@@ -71,7 +72,7 @@ const Sidebar = () => {
           </div>
         </div>
       </div>
-    </div>
+    </aside>
   )
 };
 

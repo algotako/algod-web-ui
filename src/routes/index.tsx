@@ -24,12 +24,14 @@ export default function Home() {
         <Checks />
       </Match>
       <Match when={store.state.isInitialized}>
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route path="/" element={<Dashboard />} />
-            <Route path="/accounts" element={<Accounts />} />
-          </Route>
-        </Routes>
+        <div class='flex'>
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route path="/" element={<Dashboard />} />
+              <Route path="/accounts" element={<Accounts />} />
+            </Route>
+          </Routes>
+        </div>
       </Match>
     </Switch>
   );
