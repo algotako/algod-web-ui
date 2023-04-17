@@ -89,11 +89,22 @@ const barTemplate = {
       show: false
     }
   },
+  title: {
+    text: 'Hourly Votes',
+    align: 'center',
+    style: {
+      fontSize: '14px',
+      fontWeight: 'bold'
+    }
+  },
   dataLabels: {
     enabled: false
   },
   xaxis: {
     categories: [],
+    title: {
+      text: 'Time'
+    }
   },
   yaxis: {
     title: {
