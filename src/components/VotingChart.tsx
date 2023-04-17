@@ -35,12 +35,12 @@ const VotingChart = () => {
   });
 
   return (
-    <div class='bg-white dark:bg-gray-800 w-full h-[20rem] p-4 rounded-sm flex flex-1 border border-gray-200 dark:border-gray-700 '> 
+    <div class='bg-white dark:bg-gray-800 w-full h-[20rem] p-4 rounded-sm flex border border-gray-200 dark:border-gray-700 '> 
       <Show when={!isLoading()} fallback={<div class='m-auto'><Spinner /></div>}>
-        <strong class='text-gray-400 font-medium'>
-          Votes
+        <strong class='text-gray-400 font-medium invisible'>
+          |
         </strong>
-        <div class='w-full mt-3 flex-1 text-xs'>
+        <div class='w-full m-auto flex-1 text-xs'>
           <SolidApexCharts width="100%" height={260} type="bar" options={options.options} series={options.series} />
         </div>
      </Show>

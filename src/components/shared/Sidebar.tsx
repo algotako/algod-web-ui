@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "solid-fontawesome";
 import { A, useLocation } from "solid-start";
 import { DASHBOARD_SIDEBAR_LINKS, DASHBOARD_SIDEBAR_BOTTOM_LINKS } from '~/lib/const/navigation'
 
-const linkClasses = 'flex items-center justify-flex-end gap-3 font-light px-3 py-2 hover:bg-neutral-600 hover:text-neutral-200 hover:no-underline active:bg-neutral-600 rounded-sm text-base';
+const linkClasses = 'flex items-center justify-flex-end gap-3 text-lg font-light px-3 py-2 hover:bg-neutral-600 hover:text-neutral-200 hover:no-underline active:bg-neutral-600 rounded-sm text-base';
 const activeLinkBg= 'bg-neutral-500';
 const activeLinkText = 'text-white';
 
@@ -35,24 +35,24 @@ const Sidebar = () => {
         onClick={(e) => highLight(e, location.pathname)} 
         href={item.path} 
         id={item.path}
-        class={linkClasses}>
-          <span class='w-[1.2rem]'>
+        class={`${!open() && 'justify-center'} ${linkClasses}`}>
+          <span class={`${!open() && 'justify-center'} flex w-[1.2rem]`}>
             {item.icon}
           </span>
-          <span>{item.label}</span>
+          <span class={`${!open() && 'hidden'}`}>{item.label}</span>
       </A>
     )
   }
 
   return (
     <aside class={`${open() ? 'w-60' : 'w-20'} duration-300 flex flex-col bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 p-3 border-r border-gray-200 dark:border-gray-700`}>
-      <div class='flex items-center gap-5 px-3 py-3 text-gray-600 dark:text-white'>
-        <span class='cursor-pointer' onClick={() => setOpen(!open())}>
+      <div class={`${!open() && 'justify-center'} flex items-center gap-5 px-3 py-3 text-gray-600 dark:text-white`}>
+        <span class={`cursor-pointer text-xl`} onClick={() => setOpen(!open())}>
           <FontAwesomeIcon icon='fa-solid fa-bars' />
         </span>
-        <span class='justify-center text-neutral-600 dark:text-white text-lg'>Algod Web UI</span>
+        <span class={`${!open() && 'hidden'} text-neutral-600 dark:text-white text-xl`}>Algod Web UI</span>
       </div>
-      <div class='flex-1 py-8 flex flex-col gap-1'>
+      <div class={`flex-1 py-8 flex flex-col gap-1`}>
         <For each={DASHBOARD_SIDEBAR_LINKS}>
           {(item) =>
             <SidebarLink item={item} />
@@ -66,9 +66,9 @@ const Sidebar = () => {
           }
         </For>
         <div onClick={(e) => console.log(e)}>
-          <div class={`${linkClasses} text-red-400`}>
+          <div class={`${!open() && 'justify-center'} ${linkClasses} text-red-400`}>
             <FontAwesomeIcon icon="fa-arrow-right-from-bracket" />
-            <span>Exit</span>
+            <span class={`${!open() && 'hidden'}`}>Exit</span>
           </div>
         </div>
       </div>
