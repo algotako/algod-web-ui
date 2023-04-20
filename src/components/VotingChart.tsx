@@ -24,13 +24,13 @@ const VotingChart = () => {
   createEffect(async () => {
     const votes = await terminalCalls.getHourlyVotes();
     const barOptions = barTypes.barBuilder(votes);
-
+    
     // For some reason we need to set the isLoading signal before we uupdate the chart
     setIsLoading(false);
     ApexCharts.exec(chartId, 'updateOptions', barOptions);
     ApexCharts.exec(chartId, 'updateSeries', [{
       name: 'Votes',
-      data: [10, 24, 15, 23, 6, 1]
+      data: votes.votes
     }]);
   });
 

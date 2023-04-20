@@ -1,4 +1,5 @@
 import { lazy } from 'solid-js'
+import AlgodLogs from '~/components/AlgodLogs';
 //import RadialBar from '~/components/RadialBar';
 //import VotingChart from '~/components/VotingChart';
 
@@ -16,7 +17,7 @@ const Dashboard = () => {
         <RadialBar />
       </div>
       <div class='flex flex-row gap-4 w-full'>
-        Logs
+        <AlgodLogs />
       </div>
     </main>
   )

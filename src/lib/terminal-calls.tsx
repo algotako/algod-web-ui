@@ -253,6 +253,22 @@ async function getHourlyVotes() {
   return await serverCall();
 }
 
+async function getAlgodLogs() {
+  const serverCall = server$(async () => {
+    const rawLogs = commandCall(`tail -n 25 $${DATA}/node.log`);
+    if (rawLogs.error) {
+      return rawLogs;
+    }
+    const splitLogs = rawLogs.msg.split(/\r\n|\n|\r/);
+    if (splitLogs[splitLogs.length - 1] == '') splitLogs.pop();
+    const logs = splitLogs.map((log: string) => {
+      return JSON.parse(removeLineBreaks(log));
+    });
+    return logs.reverse();
+  });
+  return await serverCall();
+}
+
 const terminalCalls = {
   initChecks,
   getNet,
@@ -263,7 +279,8 @@ const terminalCalls = {
   getFrozen,
   getMemUsed,
   getDiskUsed,
-  getHourlyVotes
+  getHourlyVotes,
+  getAlgodLogs
 }
 
 export default terminalCalls;

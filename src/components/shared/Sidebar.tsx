@@ -66,7 +66,7 @@ const Sidebar = () => {
           }
         </For>
         <div onClick={(e) => console.log(e)}>
-          <div class={`${!open() && 'justify-center'} ${linkClasses} text-red-400`}>
+          <div class={`${!open() && 'justify-center'} ${linkClasses}`}>
             <FontAwesomeIcon icon="fa-arrow-right-from-bracket" />
             <span class={`${!open() && 'hidden'}`}>Exit</span>
           </div>
