@@ -11,7 +11,7 @@ const AlgodLogs = () => {
     setLogState('logs', logs);
   });
   const thClasses = 'border border-slate-300'
-  const tdClasses = 'text-center border border-slate-500 border-l-0 overflow-hidden p-2'
+  const tdClasses = 'text-center border border-slate-500 overflow-hidden p-2'
   return (
     <div class='bg-white dark:bg-gray-800 text-gray-200 border border-gray-200 dark:border-gray-700 px-4 pt-3 pb-3 rounded-sm flex-1 w-full'>
       <div class='flex flex-row justify-between'>
@@ -40,7 +40,7 @@ const AlgodLogs = () => {
                 <td class={`${tdClasses}`}><span class='text-cyan-600'>{log.Round}</span>.<span class='text-red-600'>{log.ObjectPeriod}</span>.<span class='text-amber-600'>{log.ObjectStep}</span></td>
                 <td class={`${tdClasses}`}>{`${log.Type}`}</td>
                 <td class={`${tdClasses}`}>{`${log.Weight}/${log.WeightTotal}`}</td>
-                <td class={`${tdClasses} border-r-0 text-green-300`}>{`${log.Sender?.slice(0, 5)}...${log.Sender?.slice(-5)}`}</td>
+                <td class={`${tdClasses} text-green-300`}>{`${log.Sender?.slice(0, 5)}...${log.Sender?.slice(-5)}`}</td>
               </tr>
             }
           </For>

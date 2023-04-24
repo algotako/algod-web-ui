@@ -9,9 +9,9 @@ const Layout = () => {
 return (
     <div class='flex flex-row bg-neutral-100 h-screen w-screen overflow-hidden'>
       <Sidebar />
-      <div class='flex-1 bg-gray-200 dark:bg-gray-900'>
+      <div class='flex flex-col flex-1 h-screen overflow-hidden bg-gray-200 dark:bg-gray-900'>
         <Header />
-        <div class="p-4">{<Outlet />}</div>
+        <div class="p-6 text-lg leading-8 min-h-0 overflow-auto">{<Outlet />}</div>
       </div>
     </div>
   )
