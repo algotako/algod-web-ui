@@ -19,7 +19,7 @@ function Separator() {
 
 const Header = () => {
   return (
-    <div class='h-[64px] min-h-[64px] w-full bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 px-4 flex flex-1 justify-between items-center border-b border-gray-200 dark:border-gray-700'>
+    <div class='h-[64px] min-h-[64px] max-h-[64px] w-full bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 px-4 flex flex-1 justify-between items-center border-b border-gray-200 dark:border-gray-700'>
        <div class='relative'>
         <span class='text-gray-300 absolute top-1/2 -translate-y-1/2 left-3'>
           <FontAwesomeIcon icon='fa-solid fa-magnifying-glass' />
