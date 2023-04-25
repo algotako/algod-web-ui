@@ -44,10 +44,15 @@ const Sidebar = () => {
     )
   }
 
+  const sideBarResize = (e: any) => {
+    setOpen(!open());
+    window.dispatchEvent(new Event('resize'));
+  }
+
   return (
     <aside class={`${open() ? 'w-60' : 'w-20'} duration-300 flex flex-col bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 p-3 border-r border-gray-200 dark:border-gray-700`}>
       <div class={`${!open() && 'justify-center'} flex items-center gap-5 px-3 py-3 text-gray-600 dark:text-white`}>
-        <span class={`cursor-pointer text-xl`} onClick={() => setOpen(!open())}>
+        <span class={`cursor-pointer text-xl`} onClick={(e) => sideBarResize(e)}>
           <FontAwesomeIcon icon='fa-solid fa-bars' />
         </span>
         <span class={`${!open() && 'hidden'} text-neutral-600 dark:text-white text-xl`}>Algod Web UI</span>
