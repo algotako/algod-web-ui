@@ -59,7 +59,7 @@ async function initChecks() {
     const checkAlgod = () => {
       try {
         // Check if the user has set the $ALGORAND_NODE path
-        const results = execSync(`cat $ALGORAND_DATA/algod.net > /dev/null && echo 1 || echo 0`);
+        const results = execSync(`cat $ALGORAND_DATA/algod.pid > /dev/null && echo 1 || echo 0`);
         initCheck.algodRunning = Boolean(Number(results.toString().replace(/(\r\n|\n|\r)/gm, "")));
         if (!initCheck.algodRunning) {
           throw {

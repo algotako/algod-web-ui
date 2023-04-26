@@ -31,7 +31,7 @@ const store: Store = {
       themeMode: 'dark',
     },
     radialBar: {
-      background: '#1f2937',
+      background: '#111827',
       dataLabelsColor: '#bbb',
     }
   }

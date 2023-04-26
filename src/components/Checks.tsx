@@ -52,7 +52,7 @@ export default function Checks() {
               $ALGORAND_DATA...<span class=''>{checks.data}</span>
             </div>
             <div>
-              Alod is...<span class=''>{checks.algod}</span>
+              Algod is...<span class=''>{checks.algod}</span>
             </div>
           </div>
         </div>
