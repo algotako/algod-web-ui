@@ -1,3 +1,4 @@
+import { FontAwesomeIcon } from "solid-fontawesome";
 import { onMount, For } from "solid-js";
 import { createStore } from "solid-js/store";
 
@@ -6,29 +7,33 @@ import terminalCalls from "~/lib/terminal-calls";
 const AlgodLogs = () => {
   const [logState, setLogState] = createStore({logs: []});
 
-  const thClasses = 'border border-slate-300'
-  const tdClasses = 'text-center border border-slate-500 overflow-hidden p-2'
+  const thClasses = 'border border-slate-700 dark:border-slate-300'
+  const tdClasses = 'text-center border border-slate-400 overflow-hidden p-2'
   
-  onMount(async () => {
+  const getLogs = async () => {
     const logs = await terminalCalls.getAlgodLogs();
     setLogState('logs', logs);
-  });
+  }
 
   const undefinedFilter = (text: string) => {
     return text !== undefined ? true : '';
   }
+
+  onMount(async () => {
+    getLogs();
+  });
   
   return (
-    <div class='bg-white dark:bg-gray-800 text-gray-200 border border-gray-200 dark:border-gray-700 px-4 pt-3 pb-3 rounded-sm flex-1 w-full'>
+    <div class='bg-white dark:bg-gray-800 text-gray-500 dark:text-gray-200 border border-gray-200 dark:border-gray-700 px-4 pt-3 pb-3 rounded-sm flex-1 w-full'>
       <div class='flex flex-row justify-between'>
-        <strong class='text-gray-200 font-medium'>
+        <strong class='font-medium'>
           Algod Logs
         </strong>
-        <span>
-          RELOAD
-        </span>
+        <button onclick={() => getLogs()} class="bg-gray-700 hover:bg-gray-600 text-white font-bold px-2 rounded-full">
+          <FontAwesomeIcon icon='fa-solid fa-rotate' />
+        </button>
       </div>
-      <table class="table-fixed mt-4 w-full border-collapse border border-slate-300 text-gray-100">
+      <table class="table-fixed mt-4 w-full border-collapse text-gray-500 dark:text-gray-200">
         <thead>
           <tr>
             <th class={thClasses}>Time</th>

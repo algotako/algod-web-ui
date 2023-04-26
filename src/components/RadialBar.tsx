@@ -1,17 +1,11 @@
 import { createSignal, onMount, Show } from 'solid-js';
 import { createStore } from 'solid-js/store'
 import { SolidApexCharts } from 'solid-apexcharts';
+import { useGlobalContext } from '../context/store';
+
 import barTypes from '../lib/chartBuilder';
 import terminalCalls from '~/lib/terminal-calls';
 import Spinner from './Spinner';
-
-// Template for radial bar options
-
-const memBar = {
-  series: [],
-  trackBackground: '',
-  fillGradientColor: '',
-}
 
 // Bar gradients
 const defaultColor = '#ABE5A1';
@@ -30,6 +24,7 @@ const optionsTemp = {
 }
 
 const RadialBar = () => {
+  const store: any = useGlobalContext();
   const [isLoading, setIsLoading] = createSignal(true);;
   const [memOptions, setMemOptions] = createStore(JSON.parse(JSON.stringify(optionsTemp)));
   const [diskOptions, setDiskOptions] = createStore(JSON.parse(JSON.stringify(optionsTemp)));
@@ -39,8 +34,8 @@ const RadialBar = () => {
     const diskPercentage = await terminalCalls.getDiskUsed();
     const memTemplate = { series: [memPercentage], trackBackground: darkTrack, };
     const diskTemplate = { series: [diskPercentage], trackBackground: darkTrack, };
-    const memOp = barTypes.radialBarBuilder(memTemplate);
-    const diskOp = barTypes.radialBarBuilder(diskTemplate);
+    const memOp = barTypes.radialBarBuilder(memTemplate, store.state.theme.radialBar);
+    const diskOp = barTypes.radialBarBuilder(diskTemplate, store.state.theme.radialBar);
     setIsLoading(false);
     setMemOptions(memOp);
     setDiskOptions(diskOp);

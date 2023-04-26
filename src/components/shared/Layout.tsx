@@ -7,7 +7,7 @@ const Header = lazy(() => import('./Header'));
 const Layout = () => {
 
 return (
-    <div class='flex flex-row bg-neutral-100 h-screen w-screen overflow-hidden'>
+    <div class='flex flex-row h-screen w-screen overflow-hidden'>
       <Sidebar />
       <div class='flex flex-col flex-1 h-screen overflow-hidden bg-gray-200 dark:bg-gray-900'>
         <Header />

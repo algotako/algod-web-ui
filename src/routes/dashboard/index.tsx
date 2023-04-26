@@ -1,11 +1,9 @@
 import { lazy } from 'solid-js'
-import AlgodLogs from '~/components/AlgodLogs';
-//import RadialBar from '~/components/RadialBar';
-//import VotingChart from '~/components/VotingChart';
 
 const DashboardStatsGrid = lazy(() => import("../../components/DashboardStatsGrid"));
 const VotingChart = lazy(() => import("../../components/VotingChart"));
 const RadialBar = lazy(() => import("../../components/RadialBar"));
+const AlgodLogs = lazy(() => import("../../components/AlgodLogs"));
 
 const Dashboard = () => {
 

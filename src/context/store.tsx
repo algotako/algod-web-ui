@@ -5,9 +5,19 @@ import { createContext, useContext } from 'solid-js';
 // on the application
 
 type Store = {
-  isInitialized: boolean
+  isInitialized: boolean,
   url: string,
   token: string,
+  theme: {
+    mode: string,
+    barChart: {
+      themeMode: string
+    },
+    radialBar: {
+      background: string,
+      dataLabelsColor: string
+    }
+  }
 }
 
 // Singleton store object. ** We can make some member private using the module pattern later
@@ -15,6 +25,16 @@ const store: Store = {
   isInitialized: false,
   url: '',
   token: '',
+  theme: {
+    mode: '',
+    barChart: {
+      themeMode: 'dark',
+    },
+    radialBar: {
+      background: '#1f2937',
+      dataLabelsColor: '#bbb',
+    }
+  }
 }
 
 const GlobalContext = createContext();

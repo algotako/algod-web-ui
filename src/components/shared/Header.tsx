@@ -7,15 +7,8 @@ import {
   Menu,
   MenuItem,
 } from 'solid-headless';
+import ThemeSwitcher from "./ThemeSwitcher";
 
-
-function Separator() {
-  return (
-    <div class="flex items-center" aria-hidden="true">
-      <div class="w-full border-t border-gray-200" />
-    </div>
-  );
-}
 
 const Header = () => {
   return (
@@ -31,9 +24,9 @@ const Header = () => {
         />
       </div>
       <div class='flex items-center gap-2 mr-2'>
-        <div>
-          <FontAwesomeIcon icon='fa-solid fa-circle-half-stroke' />
-        </div>
+        <button>
+          <ThemeSwitcher />
+        </button>
         <Popover defaultOpen={false} class="relative" id="header-messages">
           {({ isOpen }) => (
             <>

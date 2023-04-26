@@ -14,10 +14,10 @@ const radialTemplate = {
       radialBar: {
         startAngle: -135,
         endAngle: 225,
-         hollow: {
+        hollow: {
           margin: 0,
           size: '80%',
-          background: '#1F2937',
+          background: '', //'#1F2937', ********
           image: undefined,
           imageOffsetX: 0,
           imageOffsetY: 0,
@@ -47,7 +47,7 @@ const radialTemplate = {
           name: {
             offsetY: -50,
             show: false,
-            color: '#111',
+            color: '',
             fontSize: '12px'
           },
           value: {
@@ -55,7 +55,7 @@ const radialTemplate = {
               return parseInt(val) + '%';
             },
             offsetY: 8,
-            color: '#ddd',
+            color: '#444', // ******
             fontSize: '24px',
             show: true,
           }
@@ -112,7 +112,7 @@ const barTemplate = {
     }
   },
   theme: {
-    mode: 'dark', 
+    mode: 'light', // ********
     palette: 'palette4', 
   },
   fill: {
@@ -141,19 +141,20 @@ const barTemplate = {
 
 
 // Takes in options to determine how the radial bar looks
-const radialBarBuilder = (options: any) => {
+const radialBarBuilder = (options: any, themes: any) => {
   const template = JSON.parse(JSON.stringify(radialTemplate));
   template.series = [Number(options.series)];
   template.options.plotOptions.radialBar.track.background = options.trackBackground;
-  //template.options.fill.gradient.gradientToColor = options.fillGradientColor;
+  template.options.plotOptions.radialBar.hollow.background = themes.background;
+  template.options.plotOptions.radialBar.dataLabels.value.color = themes.dataLabelsColor;
   return template;
 }
 
 // Takes in options to determine how the radial bar looks
-const barBuilder = (options: any) => {
+const barBuilder = (options: any, theme: any) => {
   const template = JSON.parse(JSON.stringify(barTemplate));
   template.xaxis.categories = options.timeStamps;
-  //template.options.fill.gradient.gradientToColor = options.fillGradientColor;
+  template.theme.mode = theme;
   return template;
 }
 
