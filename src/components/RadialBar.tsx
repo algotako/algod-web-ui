@@ -1,9 +1,9 @@
 import { createSignal, onMount, Show } from 'solid-js';
 import { createStore } from 'solid-js/store'
-import { SolidApexCharts } from 'solid-apexcharts';
+import { SolidApexCharts, createApexCharts } from 'solid-apexcharts';
 import { useGlobalContext } from '../context/store';
 
-import barTypes from '../lib/chartBuilder';
+import barTypes from '../utils/chartBuilder';
 import terminalCalls from '~/lib/terminal-calls';
 import Spinner from './Spinner';
 
@@ -18,16 +18,30 @@ const track = '#fff';
 const darkTrack = '#555';
 
 // Option starter template
-const optionsTemp = {
+const memOptionsTemp = {
   series: [0],
-  options: {}
+  options: {
+    chart: {
+      id: 'mem-used'
+    }
+  }
+}
+
+const diskOptionsTemp = {
+  series: [0],
+  options: {
+    chart: {
+      id: 'disk-used'
+    }
+  }
 }
 
 const RadialBar = () => {
   const store: any = useGlobalContext();
+  const ApexCharts = createApexCharts();
   const [isLoading, setIsLoading] = createSignal(true);;
-  const [memOptions, setMemOptions] = createStore(JSON.parse(JSON.stringify(optionsTemp)));
-  const [diskOptions, setDiskOptions] = createStore(JSON.parse(JSON.stringify(optionsTemp)));
+  const [memOptions, setMemOptions] = createStore(JSON.parse(JSON.stringify(memOptionsTemp)));
+  const [diskOptions, setDiskOptions] = createStore(JSON.parse(JSON.stringify(diskOptionsTemp)));
 
   onMount(async () => {
     const memPercentage = await terminalCalls.getMemUsed();
@@ -37,8 +51,10 @@ const RadialBar = () => {
     const memOp = barTypes.radialBarBuilder(memTemplate, store.state.theme.radialBar);
     const diskOp = barTypes.radialBarBuilder(diskTemplate, store.state.theme.radialBar);
     setIsLoading(false);
-    setMemOptions(memOp);
-    setDiskOptions(diskOp);
+    ApexCharts.exec('mem-used', 'updateOptions', memOp.options);
+    ApexCharts.exec('mem-used', 'updateSeries', memOp.series);
+    ApexCharts.exec('disk-used', 'updateOptions', diskOp.options);
+    ApexCharts.exec('disk-used', 'updateSeries', diskOp.series);
   })
 
   return (

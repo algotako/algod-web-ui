@@ -1,9 +1,11 @@
+import { template } from "solid-js/web";
 
 // Radial Bar
 const radialTemplate = {
   series: [59],
   options: {
     chart: {
+      id: '',
       height: 180,
       type: 'radialBar',
       toolbar: {
@@ -158,9 +160,27 @@ const barBuilder = (options: any, theme: any) => {
   return template;
 }
 
+const barThemeUpdate = (theme: string) => {
+  const template = JSON.parse(JSON.stringify(barTemplate));
+  template.theme.mode = theme;
+  return template;
+}
+
+const radialBarThemeUpdate = (id: string, theme: string) => {
+  const background = theme === 'light' ? '#E2E8F0' : '#111827';
+  const dataLabelsColor = theme === 'light' ? '#333' : '#bbb';
+  const template = JSON.parse(JSON.stringify(radialTemplate));
+  template.options.chart.id = id;
+  template.options.plotOptions.radialBar.hollow.background = background;
+  template.options.plotOptions.radialBar.dataLabels.value.color = dataLabelsColor;
+  return template.options;
+}
+
 const barTypes = {
+  barBuilder,
   radialBarBuilder,
-  barBuilder
+  barThemeUpdate,
+  radialBarThemeUpdate
 };
 
 export default barTypes;

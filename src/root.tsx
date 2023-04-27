@@ -26,7 +26,7 @@ export default function Root() {
         <Meta charset="utf-8" />
         <Meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
-      <Body class='dark'>
+      <Body id='body' class='dark'>
         <Suspense>
           <ErrorBoundary>
             <GlobalContextProvider>

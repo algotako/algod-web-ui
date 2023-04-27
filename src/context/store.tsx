@@ -11,7 +11,8 @@ type Store = {
   theme: {
     mode: string,
     barChart: {
-      themeMode: string
+      themeMode: string,
+      isLoading: boolean
     },
     radialBar: {
       background: string,
@@ -29,6 +30,7 @@ const store: Store = {
     mode: '',
     barChart: {
       themeMode: 'dark',
+      isLoading: true,
     },
     radialBar: {
       background: '#111827',
