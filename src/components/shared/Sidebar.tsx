@@ -50,30 +50,32 @@ const Sidebar = () => {
   }
 
   return (
-    <aside class={`${open() ? 'w-60' : 'w-20'} duration-300 flex flex-col bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 p-3 border-r border-gray-200 dark:border-gray-700`}>
-      <div class={`${!open() && 'justify-center'} flex items-center gap-5 px-3 py-3 text-gray-600 dark:text-white`}>
-        <span class={`cursor-pointer text-xl`} onClick={(e) => sideBarResize(e)}>
-          <FontAwesomeIcon icon='fa-solid fa-bars' />
-        </span>
-        <span class={`${!open() && 'hidden'} text-neutral-600 dark:text-white text-xl`}>Algod Web UI</span>
-      </div>
-      <div class={`flex-1 py-8 flex flex-col gap-1`}>
-        <For each={DASHBOARD_SIDEBAR_LINKS}>
-          {(item) =>
-            <SidebarLink item={item} />
-          }
-        </For>
-      </div>
-      <div class='flex flex-col gap-0.5 pt-2 border-t border-gray-700'>
-        <For each={DASHBOARD_SIDEBAR_BOTTOM_LINKS} fallback={<div>Loading...</div>}>
-          {(item) =>
-            <SidebarLink item={item} />
-          }
-        </For>
-        <div onClick={(e) => console.log(e)}>
-          <div class={`${!open() && 'justify-center'} ${linkClasses}`}>
-            <FontAwesomeIcon icon="fa-arrow-right-from-bracket" />
-            <span class={`${!open() && 'hidden'}`}>Exit</span>
+    <aside class={`${open() ? 'w-60' : 'w-20'} duration-300 border-r border-gray-200 dark:border-gray-700`}>
+      <div class='w-full h-full flex flex-col bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 p-3'>
+        <div class={`${!open() && 'justify-center'} flex items-center gap-5 px-3 py-3 text-gray-600 dark:text-white`}>
+          <span class={`cursor-pointer text-xl`} onClick={(e) => sideBarResize(e)}>
+            <FontAwesomeIcon icon='fa-solid fa-bars' />
+          </span>
+          <span class={`${!open() && 'hidden'} text-neutral-600 dark:text-white text-xl`}>Algod Web UI</span>
+        </div>
+        <div class={`flex-1 py-8 flex flex-col gap-1`}>
+          <For each={DASHBOARD_SIDEBAR_LINKS}>
+            {(item) =>
+              <SidebarLink item={item} />
+            }
+          </For>
+        </div>
+        <div class='flex flex-col gap-0.5 pt-2 border-t border-gray-700'>
+          <For each={DASHBOARD_SIDEBAR_BOTTOM_LINKS} fallback={<div>Loading...</div>}>
+            {(item) =>
+              <SidebarLink item={item} />
+            }
+          </For>
+          <div onClick={(e) => console.log(e)}>
+            <div class={`${!open() && 'justify-center'} ${linkClasses}`}>
+              <FontAwesomeIcon icon="fa-arrow-right-from-bracket" />
+              <span class={`${!open() && 'hidden'}`}>Exit</span>
+            </div>
           </div>
         </div>
       </div>
