@@ -1,0 +1,1 @@
+// Check to see if user settings are stored in local storage
