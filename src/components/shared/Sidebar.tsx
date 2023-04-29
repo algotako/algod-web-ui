@@ -29,7 +29,7 @@ const Sidebar = () => {
     element?.classList.toggle(activeLinkText);
   })
  
-  const SidebarLink = ( { item }) => {
+  const SidebarLink = ({ item }) => {
     return (
       <A 
         onClick={(e) => highLight(e, location.pathname)} 
