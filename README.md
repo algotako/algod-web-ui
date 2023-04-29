@@ -17,7 +17,7 @@ $ echo 'export ALGORAND_NODE=/path/to/node' >> ~/.zshrc
 $ echo 'export ALGORAND_DATA=/path/to/nodedata/' >> ~/.zshrc
 $ source ~/.zshrc
 ```
-Make sure to enter the correct path to you node and data folder. You can check to see if the env variable were set with the following:
+Make sure to enter the correct path to your node and data folder. You can check to see if the env variables were set with the following:
 ```
 $ set | grep ALGORAND
 ```
@@ -42,6 +42,8 @@ Start the server
 ```
 $ npm run start
 ```
+Open a browser and enter localhost:3000 or whatever port SolidStart used.
+
 This has only been tested on Linux and will not work on a Windows node. MacOS may work, but I haven't had a chance to test this out.
 
 ## Usage
